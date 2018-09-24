@@ -29,13 +29,13 @@ MessageLite is a message app built with python3. It utilizes python socket to en
   ```
 
 # How to run?
-0. download and unzip this file
-1. copy two files and three folders to the same directory
+1. download and unzip this file
+2. copy two files and three folders to the same directory
 two files: main_client.py main_server.py
 three folders: img imgMsg profilePic
-2. open cmd and change to the directory containing above files 
-3. type in cmd ```python3 main_server.py``` to initialize the server 
-4. for each new user, type in cmd ```python3 main_client.py``` to initialize GUI 
-5. follow the instructions of the program and enjoy!
+3. open cmd and change to the directory containing above files 
+4. type in cmd ```python3 main_server.py``` to initialize the server 
+5. for each new user, type in cmd ```python3 main_client.py``` to initialize GUI 
+6. follow the instructions of the program and enjoy!
 
 
