@@ -17,14 +17,11 @@ MessageLite is a message app built with python3. It utilizes python socket to en
 
 # Modules required to be installed
 ## 1. PIL
-
-### How to install PIL
   Open cmd, type in 
   ```
   pip install pillow
   ```
 ## 2. PyAudio and SpeechRecognition
-### How to install 
   Open cmd, type in 
   ```
      pip install pyaudio
@@ -32,6 +29,7 @@ MessageLite is a message app built with python3. It utilizes python socket to en
   ```
 
 # How to run?
+0. download and unzip this file
 1. copy two files and three folders to the same directory
 two files: main_client.py main_server.py
 three folders: img imgMsg profilePic
