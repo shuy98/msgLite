@@ -1,6 +1,6 @@
-Project Name: MessageLite
-Author: Shu You
-Description:
+# Project Name 
+MessageLite
+# Description
     MessageLite is a message app built with python3. It utilizes python socket 
     to enable connections between clients. main_server.py is the server which 
     receives information from clients and forwards information to clients. 
@@ -16,27 +16,28 @@ Description:
     accordingly. Actions include modifying objects on the main screen and 
     sending/receiving information to/from the server. The screen will refresh(redraw) constantly to update the objects displayed on the screen. 
 
-Components:
+# Components
 1. main_client.py
 2. main_server.py
 3. img
 4. imgMsg
 5. profilePic
 
-Working environment:
+# Working environment
 1. Windows OS
 2. Python 3
 
-Modules required to be installed:
-1. PIL
-How to install PIL: 
+# Modules required to be installed
+## 1. PIL
+
+### How to install PIL
     1. open cmd, type in "pip install pillow"
-2. PyAudio and SpeechRecognition
-How to install: 
+## 2. PyAudio and SpeechRecognition
+### How to install: 
     1. open cmd, type in "pip install pyaudio"
     2. open cmd, type in "pip install SpeechRecognition"
 
-How to run?
+# How to run?
     1. copy two files and three folders to the same directory
 	two files: main_client.py main_server.py
 	three folders: img imgMsg profilePic
