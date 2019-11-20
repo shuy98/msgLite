@@ -24,7 +24,7 @@ def handleClient(client, serverChannel, cID, clientele):
     msg = ""
     while True:
         try:
-            msg += b64decode(client.recv(1024)).decode()
+            msg += b64decode(client.recv(8192)).decode()
             
             command = msg.split("\n")
             while (len(command) > 1):
@@ -56,7 +56,8 @@ def serverThread(clientele, serverChannel):
                 if cID != senderID:                    
                     sendMsg = (instruction + " " + senderID + " " + details + 
                               "\n")
-                    clientele[cID].send(b64encode(sendMsg.encode("utf-8")))
+                    print(sendMsg)
+                    clientele[cID].send(b64encode(sendMsg.encode("utf8")))
                     if (temp[1] != "newProfile" and temp[1] != "imgMsg"):
                         print("> sent to %s:" % cID, sendMsg[:-1])
             if (temp[1] != "newProfile" and temp[1] != "imgMsg"):                        
@@ -75,7 +76,7 @@ def serverThread(clientele, serverChannel):
                     if cID != senderID:
                         sendMsg = (instruction + " " + senderID + " " + details 
                                   + "\n")
-                        clientele[cID].send(b64encode(sendMsg.encode("utf-8")))
+                        clientele[cID].send(b64encode(sendMsg.encode("utf8")))
                         if temp[1] != "imgMsgGroup":
                             print("> sent to %s:" % cID, sendMsg[:-1])
             if temp[1] != "imgMsgGroup":
@@ -98,11 +99,11 @@ while True:
     print(myID, playerNum)    
     for cID in clientele:
         print (repr(cID), repr(playerNum))
-        clientele[cID].send(b64encode(("newPlayer %s\n"%myID).encode("utf-8")))
-        client.send(b64encode(("newPlayer %s\n" % cID).encode("utf-8")))
+        clientele[cID].send(b64encode(("newPlayer %s\n"%myID).encode("utf8")))
+        client.send(b64encode(("newPlayer %s\n" % cID).encode("utf8")))
     clientele[myID] = client
     #client.send(("myIDis %s \n" % myID).encode())
-    client.send(b64encode(("myIDis %s \n" % myID).encode("utf-8")))
+    client.send(b64encode(("myIDis %s \n" % myID).encode("utf8")))
     print("connection recieved from %s" % myID)
     threading.Thread(target = handleClient, args = 
                         (client ,serverChannel, myID, clientele)).start()

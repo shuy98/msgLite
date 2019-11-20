@@ -22,7 +22,7 @@ def handleServerMsg(server, serverMsg):
     msg = ""
     command = ""
     while True:
-        msg += b64decode(server.recv(1024)).decode()
+        msg += b64decode(server.recv(8192)).decode()
         
         command = msg.split("\n")
         while (len(command) > 1):
@@ -138,7 +138,7 @@ def mousePressed(event, entry, data, nameEntry, welcome):
                 if currentGrid != 1:
                     targetuser = data.contactList[currentGrid-1][0] 
                     msg = "requestImg %s %s\n" % (targetuser, "requestImg")
-                    data.server.send(b64encode(msg.encode("utf-8")))
+                    data.server.send(b64encode(msg.encode("utf8")))
                     data.checkedGrid.add(currentGrid)
         else:
             data.gridNum = -1
@@ -240,7 +240,7 @@ def mouseReleased(event, entry, data, welcome):
         if not (msg.split(" ")[0] == "imgMsg" or 
                 msg.split(" ")[0] == "imgMsgGroup"):
             print ("sending: ", msg,)
-        data.server.send(b64encode(msg.encode("utf-8")))
+        data.server.send(b64encode(msg.encode("utf8")))
 
 def mouseMotion(event, data, welcome):    
     # event x and y handling cited from https://stackoverflow.com/
@@ -339,7 +339,7 @@ def keyPressed(event, entry, data, nameEntry):
             entry.delete(0, END)
             data.buttonColor = "#F0F0F0"
             data.sendColor = "black"
-            data.server.send(b64encode(msg.encode("utf-8")))
+            data.server.send(b64encode(msg.encode("utf8")))
             print ("sending: ", msg,)
 
     if (event.widget == nameEntry):
@@ -351,7 +351,7 @@ def keyPressed(event, entry, data, nameEntry):
             nameEntry.destroy()
             data.warning = True   
             msg = "ready %s\n" % data.myPID       
-            data.server.send(b64encode(msg.encode("utf-8")))
+            data.server.send(b64encode(msg.encode("utf8")))
         else:
             return
 
@@ -363,9 +363,9 @@ def keyPressed(event, entry, data, nameEntry):
     if event.keysym == "F5":
         # send user name to the server
         msg = "userOnline %s\n" % data.myPID       
-        data.server.send(b64encode(msg.encode("utf-8"))) 
+        data.server.send(b64encode(msg.encode("utf8"))) 
         msg = "newName %s\n" % data.displayName
-        data.server.send(b64encode(msg.encode("utf-8")))          
+        data.server.send(b64encode(msg.encode("utf8")))          
 
     if (event.keysym == "Down" and data.warning == False 
         and data.welcomeDestroy == True):        
@@ -431,15 +431,15 @@ def timerFired(data, entry):
 
             if (command == "ready"):  
                 msg = "userOnline %s\n" % data.myPID       
-                data.server.send(b64encode(msg.encode("utf-8"))) 
+                data.server.send(b64encode(msg.encode("utf8"))) 
                 msg = "newName %s\n" % data.displayName
-                data.server.send(b64encode(msg.encode("utf-8")))
+                data.server.send(b64encode(msg.encode("utf8")))
 
             if (command == "requestImg"):
                 PID = msg[1]
                 if data.profilePic != "":
                     msg = "newProfile %s %s\n" % (PID, readImg(data.profilePic))
-                    data.server.send(b64encode(msg.encode("utf-8")))
+                    data.server.send(b64encode(msg.encode("utf8")))
 
             if (command == "userOnline"):
                 PID = msg[1]             
@@ -596,7 +596,7 @@ def readImg(path):
 def writeImg(item, filename, compress=True):
     fp = open("imgMsg/%s" % filename,"wb")    
     content = item.split("'")[1]
-    fp.write(b64decode(bytes(content, encoding="utf-8")))
+    fp.write(b64decode(bytes(content, encoding="utf8")))
 
     if compress == True:
         foo = Image.open("imgMsg/%s" % filename)
@@ -611,7 +611,7 @@ def writeProfileImg(item, user):
     filename = "profilePic/%s.png" % user
     fp = open(filename,"wb")
     content = item.split("'")[1]
-    fp.write(b64decode(bytes(content, encoding="utf-8")))
+    fp.write(b64decode(bytes(content, encoding="utf8")))
     # image compression
     # cited from https://stackoverflow.com/questions/
     # 10607468/how-to-reduce-the-image-file-size-using-pil
